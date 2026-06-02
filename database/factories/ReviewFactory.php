@@ -19,11 +19,13 @@ class ReviewFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = \Faker\Factory::create('ja_JP');
+
         return [
             'user_id' => User::inRandomOrder()->first()->id,
             'book_id' => Book::inRandomOrder()->first()->id,
-            'rating' => $this->faker->numberBetween(3, 5),
-            'comment' => $this->faker->realText(30),
+            'rating' => $faker->numberBetween(3, 5),
+            'comment' => $faker->realText(30),
         ];
     }
 }

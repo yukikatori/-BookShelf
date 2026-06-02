@@ -27,8 +27,8 @@ class GenreSeeder extends Seeder
 
         foreach ($genres as $genre) {
             Genre::firstOrCreate(
-                ['genre_name' => $genre],
-                ['genre_name' => $genre]
+                ['name' => $genre],
+                ['name' => $genre]
             );
         }
     }
