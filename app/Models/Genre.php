@@ -11,7 +11,7 @@ class Genre extends Model
     use HasFactory;
 
     protected $fillable = [
-        'genre_name'
+        'name'
     ];
 
     public function books(): BelongsToMany

@@ -45,7 +45,7 @@ class BookSeeder extends Seeder
                 ]
             );
 
-            $genreIds = Genre::whereIn('genre_name', $data['genres'])->pluck('id');
+            $genreIds = Genre::whereIn('name', $data['genres'])->pluck('id');
             $book->genres()->sync($genreIds);
         }
     }
