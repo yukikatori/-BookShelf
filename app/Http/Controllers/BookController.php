@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\StoreBookRequest;
 use App\Models\Book;
 use App\Models\Genre;
 
@@ -32,4 +34,24 @@ class BookController extends Controller
         return view('books.create', compact('genres'));
     }
 
+    public function store(StoreBookRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $book = Book::create([
+            'title' => $validated['title'],
+            'author' => $validated['author'],
+            'isbn' => $validated['isbn'],
+            'published_date' => $validated['published_date'],
+            'description' => $validated['description'],
+            'image_url' => $validated['image_url'],
+            'user_id' => auth()->id(),
+        ]);
+
+        $book->genres()->sync($validated['genres']);
+
+        return redirect()
+            ->route('books.index')
+            ->with('success', '書籍を登録しました');
+    }
 }
