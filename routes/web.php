@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewLikeController;
 
@@ -11,7 +12,10 @@ use App\Http\Controllers\ReviewLikeController;
 Route::get('/', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{book}', [BookController::class, 'show'])->whereNumber('book')->name('books.show');
 
-// ログイン必須
+// ランキング
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
+
+// ログインが必要な項目
 Route::middleware('auth')->group(function () {
     // 書籍CRUD
     Route::resource('/books', BookController::class)->except('index', 'show');
@@ -33,8 +37,6 @@ Route::middleware('auth')->group(function () {
 
     // ジャンルCRUD
     Route::resource('genres', GenreController::class);
-
-    Route::get('/ranking', fn() => '準備中')->name('ranking.index');
 });
 
 
