@@ -13,7 +13,7 @@ Route::get('/books/{book}', [BookController::class, 'show'])->whereNumber('book'
 // ログイン必須
 Route::middleware('auth')->group(function () {
     // 書籍お気に入り
-    Route::post('/books/{book}/favorites', [FavoriteController::class, 'favorite'])->name('favorites.toggle');
+    Route::post('/books/{book}/favorites', [FavoriteController::class, 'favorites'])->name('favorites.toggle');
 
     // レビュー
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
@@ -33,8 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/book/{book}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('books.destroy');
 
+    // お気に入り一覧
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+
     Route::get('/ranking', fn() => '準備中')->name('ranking.index');
-    Route::get('/favorites', fn() => '準備中')->name('favorites.index');
     Route::get('/genres', fn() => '準備中')->name('genres.index');
 });
 
