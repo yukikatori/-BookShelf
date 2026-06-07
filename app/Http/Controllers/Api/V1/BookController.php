@@ -32,4 +32,16 @@ class BookController extends Controller
             ],
         ], 200);
     }
+
+    public function show(Book $book): JsonResponse
+    {
+        $book->load(['genres', 'reviews'])
+            ->loadAvg('reviews', 'rating')
+            ->loadCount('reviews')
+            ->get();
+
+        return response()->json([
+            'data' => new BookResource($book),
+        ], 200);
+    }
 }
