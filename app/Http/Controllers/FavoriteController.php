@@ -20,7 +20,9 @@ class FavoriteController extends Controller
     public function index(): View
     {
         $user = auth()->user();
-        $books = $user->favoriteBooks()->paginate(10);
+        $books = $user->favoriteBooks()
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('favorites.index', compact('books'));
     }

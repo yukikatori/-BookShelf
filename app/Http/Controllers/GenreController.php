@@ -14,7 +14,7 @@ class GenreController extends Controller
     public function index(): View
     {
         $genres = Genre::withCount('books')
-            ->orderBy('id')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('genres.index', compact('genres'));
