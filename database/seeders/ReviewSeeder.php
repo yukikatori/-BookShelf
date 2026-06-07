@@ -19,10 +19,14 @@ class ReviewSeeder extends Seeder
 
         // まず、全書籍に2件ずつレビューを投稿（22件分）
         foreach ($books as $book) {
-            Review::factory()->count(2)->create([
-                'book_id' => $book->id,
-                'user_id' => $users->random()->id,
-            ]);
+            $selectedUsers = $users->random(2);
+
+            foreach ($selectedUsers as $user) {
+                Review::factory()->create([
+                    'book_id' => $book->id,
+                    'user_id' => $user->id,
+                ]);
+            }
         }
 
         // 残り10件をランダムに追加（各書籍に0～2件）
@@ -32,17 +36,20 @@ class ReviewSeeder extends Seeder
             foreach ($books as $book) {
                 if ($remainReviews <= 0) break;
 
+                $reviewedUserIds = Review::where('book_id', $book->id)->pluck('user_id');
+                $availableUsers = $users->whereNotIn('id', $reviewedUserIds);
+
                 $extraCount = rand(0, 2);
                 $extraCount = min($extraCount, $remainReviews);
 
                 if ($extraCount > 0) {
-                    Review::factory()
-                        ->count($extraCount)
-                        ->create([
+                    foreach ($availableUsers->random($extraCount) as $user) {
+                        Review::factory()->create([
                             'book_id' => $book->id,
-                            'user_id' => $users->random()->id,
+                            'user_id' => $user->id,
                         ]);
-                    
+                    }
+
                     $remainReviews -= $extraCount;
                 }
             }
