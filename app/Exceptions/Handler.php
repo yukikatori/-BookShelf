@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -21,10 +22,14 @@ class Handler extends ExceptionHandler
     /**
      * Register the exception handling callbacks for the application.
      */
-    public function register(): void
+    public function render($request, Throwable $exception)
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'error' => '指定された書籍が見つかりません',
+            ], 404);
+        }
+
+        return parent::render($request, $exception);
     }
 }
