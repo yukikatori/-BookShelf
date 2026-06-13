@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\V1;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,11 +23,9 @@ class IndexBookRequest extends FormRequest
     {
         return [
             'keyword' => 'nullable|string|max:255',
-            'genres' => 'nullable|array',
-            'genres.*' => 'string|exists:genres,id',
-            'sort' => 'nullable|string|in:latest,oldest,title,rating',
+            'genre' => 'nullable|integer|exists:genres,id',
+            'sort' => 'nullable|string|in:newest,oldest,title,rating',
             'per_page' => 'nullable|integer|min:1|max:100',
-            'page' => 'nullable|integer|min:1',
         ];
     }
 
@@ -35,8 +33,6 @@ class IndexBookRequest extends FormRequest
     {
         return [
             'keyword.max' => 'キーワードは255文字以内で入力してください',
-            'genres.*.exists' => '選択されたジャンルは存在しません',
-            'sort.in' => '選択されたソート条件は無効です',
         ];
     }
 }

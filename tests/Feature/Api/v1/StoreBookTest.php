@@ -26,7 +26,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-13',
             'description' => 'test',
             'image_url' => '',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -70,7 +70,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -93,7 +93,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -116,7 +116,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -139,7 +139,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -162,7 +162,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -185,7 +185,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -208,7 +208,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -231,7 +231,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -257,7 +257,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -280,7 +280,7 @@ class StoreBookTest extends TestCase
             'published_date' => '',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -303,7 +303,7 @@ class StoreBookTest extends TestCase
             'published_date' => 'test',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -326,7 +326,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg' . str_repeat('a', 256),
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -349,7 +349,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'test',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -372,7 +372,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => str_repeat('a', 1001),
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -395,7 +395,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 123,
             'image_url' => 'test',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => $user->id,
         ];
 
@@ -464,7 +464,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'http://example.com/test.jpg',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => '',
         ];
 
@@ -487,7 +487,7 @@ class StoreBookTest extends TestCase
             'published_date' => '2026-06-10',
             'description' => 'test',
             'image_url' => 'test',
-            'genres' => $genres->pluck('name')->toArray(),
+            'genres' => $genres->pluck('id')->toArray(),
             'user_id' => 999,
         ];
 

@@ -52,11 +52,48 @@ class Book extends Model
             });
         }
 
-        if (! empty($filters['genres'])) {
+        if (! empty($filters['genre'])) {
+            $query->whereHas('genres', function ($q) use ($filters) {
+                $q->where('genres.id', $filters['genre']);
+            });
+        }
+
+        if (! empty($filters['sort'])) {
+            switch ($filters['sort']) {
+                case 'newest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+                
+                case 'oldest':
+                    $query->orderBy('created_at', 'asc');
+                    break;
+
+                case 'title':
+                    $query->orderByRaw('title COLLATE utf8mb4_ja_0900_as_cs ASC');
+                    break;
+                
+                case 'rating':
+                    $query->orderBy('reviews_avg_rating', 'desc')
+                        ->orderBy('created_at', 'desc');
+                    break;
+            }
+        }
+
+        return $query;
+    }
+
+    public function scopeApiFilter(Builder $query, array $filters): Builder
+    {
+        if (! empty($filters['keyword'])) {
             $query->where(function ($q) use ($filters) {
-                foreach ($filters['genres'] as $genre) {
-                    $q->orWhereHas('genres', fn($sub) => $sub->where('name', $genre));
-                }
+                $q->where('title', 'like', "%{$filters['keyword']}%")
+                    ->orWhere('author', 'like', "%{$filters['keyword']}%");
+            });
+        }
+
+        if (! empty($filters['genres'])) {
+            $query->whereHas('genres', function ($q) use ($filters) {
+                $q->whereIn('genres.id', $filters['genres']);
             });
         }
 

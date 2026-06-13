@@ -22,7 +22,7 @@ class BookController extends Controller
         $books = Book::with(['genres'])
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
-            ->filter($validated)
+            ->apiFilter($validated)
             ->paginate($perPage);
 
         return response()->json([
@@ -61,7 +61,7 @@ class BookController extends Controller
             'user_id' => $validated['user_id'],
         ]);
 
-        $genreIds = Genre::whereIn('name', $validated['genres'])->pluck('id');
+        $genreIds = Genre::whereIn('id', $validated['genres'])->pluck('id');
 
         $book->genres()->sync($genreIds);
 
@@ -84,7 +84,7 @@ class BookController extends Controller
             'user_id' => $validated['user_id'],
         ]);
 
-        $genreIds = Genre::whereIn('name', $validated['genres'])->pluck('id');
+        $genreIds = Genre::whereIn('id', $validated['genres'])->pluck('id');
         $book->genres()->sync($genreIds);
 
         return response()->json([

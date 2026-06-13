@@ -29,7 +29,7 @@ class UpdateBookRequest extends FormRequest
             'description' => 'nullable|string|max:1000',
             'image_url' => 'nullable|url|max:255',
             'genres' => 'required|array',
-            'genres.*' => 'string|exists:genres,name',
+            'genres.*' => 'integer|exists:genres,id',
             'user_id' => 'required|integer|exists:users,id',
         ];
     }
