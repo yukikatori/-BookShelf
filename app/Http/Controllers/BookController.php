@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\IndexBookRequest;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
@@ -12,13 +13,20 @@ use App\Models\Genre;
 
 class BookController extends Controller
 {
-    public function index(): View
+    public function index(IndexBookRequest $request): View
     {
+        $validated = $request->validated();
+
         $books = Book::with('genres')
+            ->withAvg('reviews', 'rating')
+            ->filter($validated)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(10)
+            ->appends($validated);
+
+        $genres = Genre::all();
         
-        return view('books.index', compact('books'));
+        return view('books.index', compact('books', 'genres'));
     }
 
     public function show(Book $book): View

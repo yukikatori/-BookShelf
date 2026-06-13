@@ -101,18 +101,18 @@ class IndexBookTest extends TestCase
         $book3 = Book::factory()->create([]);
 
         $genre1 = Genre::factory()->create([
-            'name' => 'test',
+            'id' => 1,
         ]);
         
         $genre2 = Genre::factory()->create([
-            'name' => 'fail',
+            'id' => 2,
         ]);
 
         $book1->genres()->attach($genre1);
         $book2->genres()->attach($genre1);
         $book3->genres()->attach($genre2);
 
-        $response = $this->getJson('/api/v1/books?genres[0]=test');
+        $response = $this->getJson('/api/v1/books?genres[]=1');
 
         $response->assertStatus(200);
 
